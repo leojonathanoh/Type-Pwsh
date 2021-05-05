@@ -1,7 +1,8 @@
 # Type-Pwsh
 
 [![github-actions](https://github.com/leojonathanoh/Type-Pwsh/workflows/ci-master-pr/badge.svg)](https://github.com/leojonathanoh/Type-Pwsh/actions)
-[![github-tag](https://img.shields.io/github/tag/leojonathanoh/Type-Pwsh)](https://github.com/leojonathanoh/Type-Pwsh/releases/)
+[![github-release](https://img.shields.io/github/v/release/leojonathanoh/Type-Pwsh?style=flat-square)](https://github.com/leojonathanoh/Type-Pwsh/releases/)
+[![powershell-gallery-release](https://img.shields.io/powershellgallery/v/Type-Pwsh?logo=powershell&logoColor=white&label=PSGallery&labelColor=&style=flat-square)](https://www.powershellgallery.com/packages/Type-Pwsh/)
 
 Type `pwsh` like you would type any language 🙃.
 
