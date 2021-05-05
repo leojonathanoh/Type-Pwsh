@@ -259,7 +259,12 @@ jobs:
     - name: Publish
       run: |
         set -e
-        MODULE_VERSION=$( echo "${GITHUB_REF}" | sed 's/^v*//' )
+
+        # Get 'ref-name' from 'refs/heads/ref-name'
+        REF=$( echo "${GITHUB_REF}" | rev | cut -d '/' -f 1 | rev )
+
+        # Strip of 'v' prefix from tag
+        MODULE_VERSION=$( echo "${REF}" | sed 's/^v*//' )
 
         # Generate the new module manifest
         MODULE_VERSION=${MODULE_VERSION} pwsh -Command 'build/PSModulePublisher/src/module/Generate-ModuleManifest.ps1 -DefinitionFile build/definitions/modulemanifest/definition.ps1 -Path src/Type-Pwsh/Type-Pwsh.psd1'
