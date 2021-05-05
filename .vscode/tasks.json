@@ -18,7 +18,7 @@
     ],
     "tasks": [
         {
-            "label": "Test",
+            "label": "Test (pwsh)",
             "type": "shell",
             "command": "pwsh -Command test/test.ps1",
             "group": {
@@ -27,24 +27,33 @@
             }
         },
         {
+            "label": "Test (powershell)",
+            "type": "shell",
+            "command": "powershell -Command test/test.ps1",
+            "group": {
+                "isDefault": true,
+                "kind": "test"
+            }
+        },
+        {
             "label": "Build: Generate module manifest",
             "type": "shell",
-            "command": "MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command build/PSModulePublisher/src/module/Generate-ModuleManifest.ps1 -DefinitionFile build/definitions/modulemanifest/definition.ps1 -Path src/Type-Pwsh/Type-Pwsh.psd1",
+            "command": "MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command 'build/PSModulePublisher/src/module/Generate-ModuleManifest.ps1 -DefinitionFile build/definitions/modulemanifest/definition.ps1 -Path src/Type-Pwsh/Type-Pwsh.psd1'",
             "group": {
                 "isDefault": true,
                 "kind": "build"
             }
         },
         {
-            "label": "Publish: Generate module manifest (dry run)",
+            "label": "Publish module (dry run)",
             "type": "shell",
-            "command": "NUGET_API_KEY=${input:NUGET_API_KEY} MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath src/Type-Pwsh/Type-Pwsh.psd1 -Repository PSGallery -DryRun",
+            "command": "NUGET_API_KEY=${input:NUGET_API_KEY} MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command 'build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath src/Type-Pwsh/Type-Pwsh.psd1 -Repository PSGallery -DryRun'",
             "group": "build"
         },
         {
-            "label": "Publish: Generate module manifest",
+            "label": "Publish module",
             "type": "shell",
-            "command": "NUGET_API_KEY=${input:NUGET_API_KEY} MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath src/Type-Pwsh/Type-Pwsh.psd1 -Repository PSGallery",
+            "command": "NUGET_API_KEY=${input:NUGET_API_KEY} MODULE_VERSION=${input:MODULE_VERSION} pwsh -Command 'build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath src/Type-Pwsh/Type-Pwsh.psd1 -Repository PSGallery'",
             "group": "build"
         },
 
