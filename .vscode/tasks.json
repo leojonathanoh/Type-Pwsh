@@ -5,12 +5,8 @@
     "tasks": [
         {
             "label": "Test",
-            "type": "process",
-            "command": "pwsh",
-            "args": [
-                "-Command",
-                "test/test.ps1"
-            ],
+            "type": "shell",
+            "command": "pwsh -Command test/test.ps1",
             "group": {
                 "isDefault": true,
                 "kind": "test"
@@ -18,12 +14,8 @@
         },
         {
             "label": "Build: Generate module manifest",
-            "type": "process",
-            "command": "pwsh",
-            "args": [
-                "-Command",
-                "build/PSModulePublisher/src/module/Generate-ModuleManifest.ps1 -DefinitionFile build/definitions/modulemanifest/definition.ps1 -Path src/Type-Pwsh/Type-Pwsh.psd1"
-            ],
+            "type": "shell",
+            "command": "pwsh -Command build/PSModulePublisher/src/module/Generate-ModuleManifest.ps1 -DefinitionFile build/definitions/modulemanifest/definition.ps1 -Path src/Type-Pwsh/Type-Pwsh.psd1",
             "group": {
                 "isDefault": true,
                 "kind": "build"
