@@ -5,8 +5,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 Describe "whatis" -Tag 'unit' {
 
     It 'Given a byte, it returns a utf8 string' {
-        $this = 240,159,144,145
-        $that = '🐑'
+        $this = 97,110,105,109,97,108
+        $that = 'animal'
 
         whatis $this | Should -Be $that
     }
