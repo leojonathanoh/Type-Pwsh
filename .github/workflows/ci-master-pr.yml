@@ -228,3 +228,31 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-to-psgallery:
+    needs: [windows-2016, windows-2019, ubuntu-16-04, macos-10-15, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Powershell version
+      run: |
+        pwsh -NoLogo -NonInteractive -NoProfile -Command '$PSVersionTable'
+    - name: Publish
+      run: |
+        MODULE_VERSION=${GITHUB_REF} pwsh -NoLogo -NonInteractive -NoProfile -Command "build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath build/definitions/modulemanifest/definition.ps1
+
+  publish-draft-release:
+    needs: [windows-2016, windows-2019, ubuntu-16-04, macos-10-15, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2, publish-to-psgallery]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+    - id: release-drafter
+      uses: release-drafter/release-drafter@v5
+      with:
+        # config-name: release-drafter.yaml
+        publish: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
