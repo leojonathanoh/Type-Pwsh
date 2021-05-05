@@ -257,6 +257,8 @@ jobs:
       run: |
         pwsh -NoLogo -NonInteractive -NoProfile -Command '$PSVersionTable'
     - name: Publish
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: |
         set -e
 
