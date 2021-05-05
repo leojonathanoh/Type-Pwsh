@@ -5,12 +5,22 @@
 
 Type `pwsh` like you would type any language 🙃.
 
+## Install
+
+Open[`powershell`](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-5.1) or [`pwsh`](https://github.com/powershell/powershell#-powershell) and type:
+
+```powershell
+Install-Module -Name Type-Pwsh -Repository PSGallery -Scope CurrentUser -Verbose
+```
+
+If prompted to trust the repository, hit `Y` and `enter`.
+
 ## Examples
 
 ```powershell
 Import-Module Type-Pwsh
 
-# Let's try to find out something is
+# Let's try to find out what something is
 whatis 240,159,144,145
 
 # Let's try and find out more
