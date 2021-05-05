@@ -11,7 +11,7 @@ on:
     - master
 
 jobs:
-  windows-2016:
+  test-powershell-5-1-windows-2016:
     runs-on: windows-2016
     steps:
     - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
       run: |
         powershell -NoLogo -NonInteractive -NoProfile -Command './test/test.ps1'
 
-  windows-2019:
+  test-powershell-5-1-windows-2019:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
@@ -57,36 +57,36 @@ jobs:
       run: |
         powershell -NoLogo -NonInteractive -NoProfile -Command './test/test.ps1'
 
-  ubuntu-16-04:
-    runs-on: ubuntu-16.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Display system info (linux)
-      run: |
-        set -e
-        hostname
-        whoami
-        cat /etc/*release
-        lscpu
-        free
-        df -h
-        pwd
-        docker info
-        docker version
+  # ubuntu-16-04:
+  #   runs-on: ubuntu-16.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Display system info (linux)
+  #     run: |
+  #       set -e
+  #       hostname
+  #       whoami
+  #       cat /etc/*release
+  #       lscpu
+  #       free
+  #       df -h
+  #       pwd
+  #       docker info
+  #       docker version
 
-  macos-10-15:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: Display system info (macos)
-      run: |
-        set -e
-        hostname
-        whoami
-        df -h
-        pwd
-        # docker info
-        # docker version
+  # macos-10-15:
+  #   runs-on: macos-10.15
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Display system info (macos)
+  #     run: |
+  #       set -e
+  #       hostname
+  #       whoami
+  #       df -h
+  #       pwd
+  #       # docker info
+  #       # docker version
 
   ##########
   # Docker #
@@ -236,7 +236,7 @@ jobs:
         pwsh -NoLogo -NonInteractive -NoProfile -Command './test/test.ps1'
 
   update-draft-release:
-    needs: [windows-2016, windows-2019, ubuntu-16-04, macos-10-15, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2]
+    needs: [test-powershell-5-1-windows-2016, test-powershell-5-1-windows-2019, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2]
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -246,7 +246,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-to-psgallery:
-    needs: [windows-2016, windows-2019, ubuntu-16-04, macos-10-15, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2]
+    needs: [test-powershell-5-1-windows-2016, test-powershell-5-1-windows-2019, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2]
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
@@ -275,7 +275,7 @@ jobs:
         NUGET_API_KEY=${NUGET_API_KEY} MODULE_VERSION=${MODULE_VERSION} pwsh -Command 'build/PSModulePublisher/src/Invoke-Publish.ps1 -ModuleManifestPath src/Type-Pwsh/Type-Pwsh.psd1 -Repository PSGallery -DryRun'
 
   publish-draft-release:
-    needs: [windows-2016, windows-2019, ubuntu-16-04, macos-10-15, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2, publish-to-psgallery]
+    needs: [test-powershell-5-1-windows-2016, test-powershell-5-1-windows-2019, test-powershell-6-0, test-powershell-6-1, test-powershell-6-1, test-powershell-7-0, test-powershell-7-1, test-powershell-7-2, publish-to-psgallery]
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
