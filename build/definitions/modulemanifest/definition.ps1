@@ -2,7 +2,6 @@
 # - Ensure all relevant details are updated prior to publishing each version of the module.
 # - To simulate generation of the manifest based on this definition, run the included development entrypoint script Invoke-PSModulePublisher.ps1.
 # - To publish the module, tag the associated commit and push the tag.
-
 @{
     RootModule = 'Type-Pwsh.psm1'
     # ModuleVersion = ''                            # Value will be set for each publication based on the tag ref. Defaults to '0.0.0' in development environments and regular CI builds
@@ -23,11 +22,7 @@
     # TypesToProcess = @()
     # FormatsToProcess = @()
     # NestedModules = @()
-    FunctionsToExport = @(
-        'explain',
-        'tellme',
-        'whatis'
-    )
+    FunctionsToExport = Get-ChildItem $PSScriptRoot/../../../src/Type-Pwsh/public/*.ps1 | ? { $_ -notmatch '\.Tests.ps1' } | % { $_.BaseName }
     CmdletsToExport = @()
     VariablesToExport = @()
     AliasesToExport = @()
@@ -37,22 +32,25 @@
     PrivateData = @{
         # PSData = @{           # Properties within PSData will be correctly added to the manifest via Update-ModuleManifest without the PSData key. Leave the key commented out.
             Tags = @(
-                'interactive'
-                'english'
-                'funny'
-                'simplicity'
-                'layman'
-                'satirical'
-                'pwsh'
                 'brainy'
-                'philosophical'
-                'humorous'
                 'catty'
                 'comical'
-                'suspensive'
-                'humanly'
-                'watery'
+                'conversational'
+                'english'
                 'flowy'
+                'funny'
+                'humanly'
+                'humorous'
+                'interactive'
+                'intuitive'
+                'layman'
+                'philosophical'
+                'powershell'
+                'pwsh'
+                'satirical'
+                'simple'
+                'suspensive'
+                'watery'
             )
             LicenseUri = 'https://raw.githubusercontent.com/leojonathanoh/Type-Pwsh/master/LICENSE'
             ProjectUri = 'https://github.com/leojonathanoh/Type-Pwsh'
