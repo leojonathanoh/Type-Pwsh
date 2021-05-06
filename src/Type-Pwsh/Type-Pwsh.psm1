@@ -7,9 +7,9 @@ $script:MODULE_PUBLIC_DIR = Join-Path $MODULE_BASE_DIR 'public'
 #     . $_.FullName
 # }
 
-# Get-ChildItem "$script:MODULE_PRIVATE_DIR/*.ps1" -exclude *.Tests.ps1 | % {
-#     . $_.FullName
-# }
+Get-ChildItem "$script:MODULE_PRIVATE_DIR/*.ps1" -exclude *.Tests.ps1 | % {
+    . $_.FullName
+}
 
 Get-ChildItem "$script:MODULE_PUBLIC_DIR/*.ps1" -exclude *.Tests.ps1 | % {
     . $_.FullName
