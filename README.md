@@ -25,8 +25,8 @@ Import-Module Type-Pwsh
 what is 240,159,144,145
 
 # Let's try and find out more
-tellme what is 240,159,144,145
-tellme what could be 240,159,144,145
+tell me what is 240,159,144,145
+tell me what could be 240,159,144,145
 
 # And even more
 explain what is 240,159,144,145
