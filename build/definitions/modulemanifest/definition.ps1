@@ -6,7 +6,7 @@
     RootModule = 'Type-Pwsh.psm1'
     # ModuleVersion = ''                            # Value will be set for each publication based on the tag ref. Defaults to '0.0.0' in development environments and regular CI builds
     GUID = 'dbe87ca9-5e8e-4b6b-b610-30f83233b9a8'
-    Author = 'Type-Pwsh'
+    Author = 'The Oh Brothers'
     CompanyName = 'The Oh Brothers'
     Copyright = '(c) 2021 The Oh Brothers'
     Description = 'Type pwsh like you would type any language 🙃.'
@@ -22,7 +22,9 @@
     # TypesToProcess = @()
     # FormatsToProcess = @()
     # NestedModules = @()
-    FunctionsToExport = Get-ChildItem $PSScriptRoot/../../../src/Type-Pwsh/public/*.ps1 | ? { $_ -notmatch '\.Tests.ps1' } | % { $_.BaseName }
+    FunctionsToExport = @(
+        Get-ChildItem $PSScriptRoot/../../../src/Type-Pwsh/public -Exclude *.Tests.ps1 | % { $_.BaseName }
+    )
     CmdletsToExport = @()
     VariablesToExport = @()
     AliasesToExport = @()
